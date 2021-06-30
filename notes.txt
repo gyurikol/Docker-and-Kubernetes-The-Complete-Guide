@@ -17,10 +17,14 @@ QUESTIONS AND ANSWERS
     what are control groups (cgroups)?
         used to limit amount of resources used per process
 
+    what is a dockerfile?
+        configuration to define how your container should behave
+
 NOTES
     > [docker run] = [docker create] + [docker start]
     > create a container
         [docker create <image name>]
+            can change default startup command by writing a command after image name
     > start a container
         [docker start <container id>]
     > clean docker system
@@ -36,3 +40,60 @@ NOTES
         [docker stop <container id>]
     > kill a container (SIGKILL)
         [docker kill <contianer id>]
+    > execute an additional command in a container
+        [docker exec -it <container id> <command>]
+            exec - run another command
+            -it - allow us to provide input to the container
+    > dockerfile creation flow
+        1) specify a base image
+        2) run some commands to install additional programs
+        3) specify a command to run on container startup
+    > dockerfile
+        - each line is an incremental change on the prior image snapshot
+        - docker creates a temporary container per line/step on dockerfile build
+        - changes to early sections of the file may require recompiling of images
+            as these incremental order of changes wont exist in cache
+    > tagging an image (making it easey to run)
+        [docker build -t gyuri/redis:latest .]
+            naming convention is:
+              ----------------------------------------------------
+              |     gyuri       /        redis        :   latest  |
+              |       ^                    ^                ^     |
+              | Your docker ID     Repo/Project Name     Version  |
+              ----------------------------------------------------
+    > manual image generation with docker commit
+        [docker commit -c <command> <container id>]
+            command being the default command for the docker image
+    > docker run with port mapping
+        [docker run -p 8080:8080 <image id>]
+                        ^    ^
+            localhost port  container port
+    > dockerfile specify working directory
+        [WORKDIR /usr/app]
+            any following command will be executed relative to this parth in the container
+    > changing files that will be included in the fs snapshot will re-run and perform all steps in the dockerfile
+      without refering to cache (npm install will rerun and not refer to cache)
+        on tasks and steps that are expensive this is not ideal
+            - the changes before were:
+                COPY ./ ./
+                RUN npm install
+            - and changed to:
+                COPY ./package.json ./
+                RUN npm install
+                COPY ./ ./
+            - therefore the copied files will not effect the npm installation and referred snapshots if
+              later changes down the track will be made to say the 'index.js' file.
+                which npm install is not dependant on            
+
+
+
+
+
+
+
+
+
+
+
+
+
