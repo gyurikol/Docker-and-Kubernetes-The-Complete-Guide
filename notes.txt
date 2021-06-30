@@ -1,0 +1,38 @@
+QUESTIONS AND ANSWERS
+    what is a image?
+        single file with all the deps and config required to run a program
+    what is a container?
+        instance of an image. runs a program.
+    what is docker?
+        docker is a platform or ecosystem around creating and running containers
+    why do we use docker?
+        docker makes it really easy to install and run software without worrying about setup or depenencies
+    what is the docker client (docker cli)?
+        tool that we issue commands to
+    what is the docker server (docker daemon)?
+        toold that is responsible for creating images, running containers, etc.
+
+    what is namespacing?
+        isolating resources per process (or group of processes)
+    what are control groups (cgroups)?
+        used to limit amount of resources used per process
+
+NOTES
+    > [docker run] = [docker create] + [docker start]
+    > create a container
+        [docker create <image name>]
+    > start a container
+        [docker start <container id>]
+    > clean docker system
+        [docker system prune]
+            this will remove:
+                all stopped containers
+                all networks not used by at least one container
+                all dangling images
+                all build cache
+    > get logs from a container
+        [docker logs <container id>]
+    > stop a container (SIGTERM)
+        [docker stop <container id>]
+    > kill a container (SIGKILL)
+        [docker kill <contianer id>]
