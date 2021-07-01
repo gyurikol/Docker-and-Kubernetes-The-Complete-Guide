@@ -1,0 +1,16 @@
+# version of docker compose to use
+version: '3'
+
+# setup types of services to automatically compose
+services:
+    redis-server:
+        image: 'redis'
+    node-app:
+        # always restart node-app container
+        restart: on-failure
+        # look in the current directory for a docker file
+        # and use that to build this image
+        build: .
+        ports:
+            #    localhost : container port
+            - "4001:8081"

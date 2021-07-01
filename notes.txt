@@ -20,6 +20,17 @@ QUESTIONS AND ANSWERS
     what is a dockerfile?
         configuration to define how your container should behave
 
+    what is docker compose?
+        used to start up multiple docker containers at the same time.
+        automates some of the long-winded arguments we were passing to 'docker run'.
+        assists in connecting containers in some automated fashion (networking).
+
+    what are restart policies?
+        they are used to state a container automatic restart policy in the event a container has crashed, stopped, etc.
+
+    why cant i put no without quotes in docker-compose.yml file?
+        no is a yaml file reserved word for false. therefore needs to be contained within single or double quotes.
+
 NOTES
     > [docker run] = [docker create] + [docker start]
     > create a container
@@ -27,6 +38,8 @@ NOTES
             can change default startup command by writing a command after image name
     > start a container
         [docker start <container id>]
+    > start a container in the background (detached mode)
+        [docker start -d <image name>]
     > clean docker system
         [docker system prune]
             this will remove:
@@ -84,8 +97,22 @@ NOTES
             - therefore the copied files will not effect the npm installation and referred snapshots if
               later changes down the track will be made to say the 'index.js' file.
                 which npm install is not dependant on            
-
-
+    > run an instance of the all the containers, images and services in the docker-compose.yml file
+        [docker-compose up]
+    > start up all our docker-compose containers, images and serverts in the docker-compose.yml file.
+      but make sure you rebuild the images first.
+        [docker-compose up --build]
+    > start multi-container application in the background (detached mode) (**refers to docker-compose file)
+        [docker-compose up -d]
+    > stop multi-container application (**refers to docker-compose file)
+        [docker-compose down]
+    > restart policies
+        "no"           - never attempt to restart this. container if it stops or crashes
+        always         - if this container stops *for any reason* always attempt to restart it
+        on-failure     - only restart if the container stops with an error code
+        unless-stopped - always restart unless we (the developers) forcibly stop it
+    > check the status of the running containers in the docker-compose.yml file
+        [docker-compose ps]
 
 
 
