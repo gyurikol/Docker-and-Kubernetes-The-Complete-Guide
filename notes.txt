@@ -113,9 +113,21 @@ NOTES
         unless-stopped - always restart unless we (the developers) forcibly stop it
     > check the status of the running containers in the docker-compose.yml file
         [docker-compose ps]
-
-
-
+    > build with custom named dockerfile
+        [docker build -f <dockerfile filename> .]
+            -f for the filename argument
+            *still needs the . at the end to specify the build context*
+    > map the pwd into the '/app' folder to access from container
+        [docker run -p <localhost port>:<container port> -v $(pwd):/app <image id>]
+            *map a folder that is inside a container to a folder that is outside of a container*
+    > put a bookmark on a folder (e.g. node_modules)
+        [docker run -p 3000:3000 -v /app/node_modules <image id>]
+            - therefore /app/node_modules is set in stone, dont try mess with it, dont try and map it out
+              with anything else
+    > Attach local standard input, output, and error streams to a running container
+        [docker attach <container id>]
+    > nginx
+        popular web server which upon request can purely respond with some static files
 
 
 
