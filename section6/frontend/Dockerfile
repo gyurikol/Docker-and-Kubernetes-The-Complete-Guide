@@ -3,7 +3,7 @@ FROM node:alpine
 
 WORKDIR '/app'
 
-COPY package.json .
+COPY package*.json ./
 RUN npm install
 COPY . .
 
@@ -11,4 +11,5 @@ RUN npm run build
 
 # Add nginx image and copy from first build phase
 FROM nginx
+EXPOSE 80
 COPY --from=0 /app/build /usr/share/nginx/html
