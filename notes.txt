@@ -31,6 +31,13 @@ QUESTIONS AND ANSWERS
     why cant i put no without quotes in docker-compose.yml file?
         no is a yaml file reserved word for false. therefore needs to be contained within single or double quotes.
 
+    what is a node (kuberenetes)?
+        virtual machine or physical computer
+    what is a master (kubernetes)?
+        controls what each node does
+    what is a cluster (kubernetes)?
+        Nodes + Master form a 'Cluster'
+
 NOTES
     > [docker run] = [docker create] + [docker start]
     > create a container
@@ -128,6 +135,8 @@ NOTES
         [docker attach <container id>]
     > nginx
         popular web server which upon request can purely respond with some static files
+    > Dockerrun.aws.json file
+        Container Definitions
 
 
 
