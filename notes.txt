@@ -31,6 +31,10 @@ QUESTIONS AND ANSWERS
     why cant i put no without quotes in docker-compose.yml file?
         no is a yaml file reserved word for false. therefore needs to be contained within single or double quotes.
 
+    what is kubernetes?
+        system for running many different containers over multiple different machines
+    why use kubernetes?
+        when you need to run many different containers with different images
     what is a node (kuberenetes)?
         virtual machine or physical computer
     what is a master (kubernetes)?
