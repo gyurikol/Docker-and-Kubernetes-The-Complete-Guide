@@ -42,6 +42,14 @@ QUESTIONS AND ANSWERS
     what is a cluster (kubernetes)?
         Nodes + Master form a 'Cluster'
 
+    what is minikube? (development environment)
+        command line software you can use to setup a tiny kubernetes cluster on local computer
+    what is a managed solution? (production environment)
+        references to outside cloud providers that will setup an entire kubernetes cluter
+        they will also handle alot of the low-level tasks required in a secure fashion
+            e.g. EKS (Amazon Elastic Container Service for Kubernetes)
+                 GKE (Google Cloud Kubernetes Engine)
+
 NOTES
     > [docker run] = [docker create] + [docker start]
     > create a container
@@ -141,11 +149,7 @@ NOTES
         popular web server which upon request can purely respond with some static files
     > Dockerrun.aws.json file
         Container Definitions
-
-
-
-
-
-
-
+    > kubectl vs minikube
+        kubectl - use for managing containers in the node
+        minikube - use for managing the VM itself (LOCAL ONLY!)
 
