@@ -1,74 +1,3 @@
-QUESTIONS AND ANSWERS
-    what is a image?
-        single file with all the deps and config required to run a program
-    what is a container?
-        instance of an image. runs a program.
-    what is docker?
-        docker is a platform or ecosystem around creating and running containers
-    why do we use docker?
-        docker makes it really easy to install and run software without worrying about setup or depenencies
-    what is the docker client (docker cli)?
-        tool that we issue commands to
-    what is the docker server (docker daemon)?
-        toold that is responsible for creating images, running containers, etc.
-
-    what is namespacing?
-        isolating resources per process (or group of processes)
-    what are control groups (cgroups)?
-        used to limit amount of resources used per process
-
-    what is a dockerfile?
-        configuration to define how your container should behave
-
-    what is docker compose?
-        used to start up multiple docker containers at the same time.
-        automates some of the long-winded arguments we were passing to 'docker run'.
-        assists in connecting containers in some automated fashion (networking).
-
-    what are restart policies?
-        they are used to state a container automatic restart policy in the event a container has crashed, stopped, etc.
-
-    why cant i put no without quotes in docker-compose.yml file?
-        no is a yaml file reserved word for false. therefore needs to be contained within single or double quotes.
-
-    what is kubernetes?
-        - system to deploy containerized apps
-        - system for running many different containers over multiple different machines
-    why use kubernetes?
-        when you need to run many different containers with different images
-    what is a node (kuberenetes)?
-        virtual machine or physical computer
-    what is a master (kubernetes)?
-        - machines (or vm's) with a set of programs to manage nodes
-        - controls what each node does
-    what is a cluster (kubernetes)?
-        Nodes + Master form a 'Cluster'
-
-    what is minikube? (development environment)
-        command line software you can use to setup a tiny kubernetes cluster on local computer
-    what is a managed solution? (production environment)
-        references to outside cloud providers that will setup an entire kubernetes cluter
-        they will also handle alot of the low-level tasks required in a secure fashion
-            e.g. EKS (Amazon Elastic Container Service for Kubernetes)
-                 GKE (Google Cloud Kubernetes Engine)
-    
-    when do we want to use a pod object (k8s)?
-        when we want to 'run one or more closely related containers'
-    when do we want to use a services object (k8s)?
-        when we want to 'set up networking in a kubernetes cluster'
-    what is the 'label selector' system (k8s)?
-        when we want to provide a 'service' by reference to an objects label metadata
-
-    what is the kube-apiserver (k8s)?
-        - lives in master
-        - responsible for monitoring the current status of all the different nodes inside of the cluster
-          to ensure that they are doing the correct thing
-
-    what is a 'Imperative Deployment'?
-        do exactly these steps to arrive at this container setup
-    what is a 'Declarative Deployment'?
-        our container setup should look like this, make it happen
-
 NOTES
     > [docker run] = [docker create] + [docker start]
     > create a container
@@ -205,4 +134,48 @@ NOTES
         - The master works constatly to meet your desired state
     > kubernetes (kubectl)
         - has the capabilities to perform commands/changes with both a 'Imperative Approach' and 'Declarative Approach'
+    > Imperative vs Declative difference (running a new image)
+        Imperative
+            1. run a command to list out current running pods
+            2. run a command to update the current pod to use a new image
+        Declarative
+            1. update our config file that originally created the pod
+            2. throw the updated config file into kubectl
+    > kubernetes config-file unique identifier
+        'Name' & 'Kind' are our unique identifiers in a kubernetes config file
+            e.g.:
+                Name: client-pod
+                Kind: pod
+                image: multi-worker
+    > kubectl describe <object type> <object name>
+        get detailed info about an object
+            kubectl - CLI we use to change our kubernetes cluster
+            describe - we want to get detailed info
+            <object type> - specifies the type of object we want to get info about
+            <object name> - name of object
+                optional: if not mentioned, will get all objects and their detailed information
+    > when a pod is created there are some fields in the pod config that 'can' and 'cant' be updated when
+      a pod is already running
+        - this is where we can make use of deployments
+    > kubectl delete -f <config file>
+        remove an object (with an imperative update) specified according to configuration file
+            kubectl - CLI we use to change our Kubernetes cluster
+            delete - we want to delete a running object
+            -f - specifies that we want to feed in a file to say what to delete
+            <filename> - path to config file that created this object
+    > docker build and tag with a version number
+        docker build -t gyuri/multi-client:<version> ... e.g.
+            docker build -t gyuri/multi-client:v2
+    > imperative command to update image
+        kubectl set image <object_type>/<object_name> <container_name>=<new image to use>
+            e.g. kubectl set image deployment/client-deployment client=gyuri/multi-client:v2
+                kubectl - CLI we use to change our kubernetes cluster
+                set - we want to change a property
+                image - we want to change the 'image' property
+                <object_type> - type of object
+                <object_name> - name of object
+                <container_name> - name of the container we are updating (get this from config file)
+                <new image to use> - full name of image to use with tag
+        
+
 
