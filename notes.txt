@@ -32,13 +32,15 @@ QUESTIONS AND ANSWERS
         no is a yaml file reserved word for false. therefore needs to be contained within single or double quotes.
 
     what is kubernetes?
-        system for running many different containers over multiple different machines
+        - system to deploy containerized apps
+        - system for running many different containers over multiple different machines
     why use kubernetes?
         when you need to run many different containers with different images
     what is a node (kuberenetes)?
         virtual machine or physical computer
     what is a master (kubernetes)?
-        controls what each node does
+        - machines (or vm's) with a set of programs to manage nodes
+        - controls what each node does
     what is a cluster (kubernetes)?
         Nodes + Master form a 'Cluster'
 
@@ -49,6 +51,23 @@ QUESTIONS AND ANSWERS
         they will also handle alot of the low-level tasks required in a secure fashion
             e.g. EKS (Amazon Elastic Container Service for Kubernetes)
                  GKE (Google Cloud Kubernetes Engine)
+    
+    when do we want to use a pod object (k8s)?
+        when we want to 'run one or more closely related containers'
+    when do we want to use a services object (k8s)?
+        when we want to 'set up networking in a kubernetes cluster'
+    what is the 'label selector' system (k8s)?
+        when we want to provide a 'service' by reference to an objects label metadata
+
+    what is the kube-apiserver (k8s)?
+        - lives in master
+        - responsible for monitoring the current status of all the different nodes inside of the cluster
+          to ensure that they are doing the correct thing
+
+    what is a 'Imperative Deployment'?
+        do exactly these steps to arrive at this container setup
+    what is a 'Declarative Deployment'?
+        our container setup should look like this, make it happen
 
 NOTES
     > [docker run] = [docker create] + [docker start]
@@ -152,4 +171,38 @@ NOTES
     > kubectl vs minikube
         kubectl - use for managing containers in the node
         minikube - use for managing the VM itself (LOCAL ONLY!)
+    > k8s 'services' object subtypes
+        ClusterIP    -
+        NodePort     - exposes a container to the outside world (only good for dev purposes!!!)
+        LoadBalancer -
+        Ingress      - 
+    > kube-proxy
+        every single node or member of a k8s cluster has a program called the kube-proxy
+            > it is the 'one single window to the outside world'
+    > NodePort Service
+        nodePort property range:
+            - random between 30000-32767
+    > kubectl apply -f <filename"
+        kubectl - CLI we use to change our Kubernetes cluster
+        apply - change the current configuration of our cluster
+        -f - we want to specify a file taht has the config changes
+        <filename> - path to the file with the config
+    > kubectl get [pods|services|*other-objects*]
+        when getting services it will only report on:
+            port: port that other objects will try and access to reference other pods that the service points to
+            nodePort: the port we would use to try and access the service from maybe our browser
+    > when we interact with the kubectl CLI command:
+        when we pass a file or commands, we are nearly all the time are interacting with the 'master'.
+        this performs monitoring and delegation to seperate nodes running a docker instance
+    > kubernetes takeaways
+        - kubnernetes is a system to deploy containerized apps
+        - 'Nodes' are individual machines (or vm's) that run containers
+        - 'Masters' are machines (or vm's) with a set of programs to manage nodes
+        - Kubernetes did build our images - it got them from somewhere else
+        - Kubernetes (the master) decided where to run each container
+            \ each node can run a dissimilar set of containers
+        - To deploy something, we update the desired state of the master with a config file
+        - The master works constatly to meet your desired state
+    > kubernetes (kubectl)
+        - has the capabilities to perform commands/changes with both a 'Imperative Approach' and 'Declarative Approach'
 
