@@ -96,3 +96,16 @@ QUESTIONS AND ANSWERS
         - manually delete pods to get the deployment to recreate them with the lates version
         - tag built images with a real version number and specify that version in the config file
         - use an imperative command to update the image version the deployment should use
+    
+    what is the difference in terminology of the word 'Volume' between Kubernetes and Generic container terminology?
+        Generic Container Terminology:
+            - some type of mechanism that allows a container to accesss a filesytem outside itself
+        Kubernetes
+            - An 'Object' that allows a container to store data at the pod level
+
+    what is a PVC (k8s)?
+        - Persistant Volume Claim
+
+    why dont we want to just simply increase replicas on a postgres deployment (k8s)?
+        - If the databases are not aware of each other it is a recipe for disaster
+        - Data will be become dirty, plus concurrent access can cause issues when holding file input access
