@@ -109,3 +109,33 @@ QUESTIONS AND ANSWERS
     why dont we want to just simply increase replicas on a postgres deployment (k8s)?
         - If the databases are not aware of each other it is a recipe for disaster
         - Data will be become dirty, plus concurrent access can cause issues when holding file input access
+
+    what is a volume? (k8s)
+        piece of storage tied to pod (if pod dies, volume dies)
+    what is a persistant volume? (k8s)
+        a volume that lives outside of a pod (if a pod dies, volume persists)
+    what is a persistant volume claim? (k8s)
+        an advertisedment of options which you can request inside of your pod config.
+        and when you do, kubernetes will look inside the stores of persistant volume and could give you
+            a volume ahead of time (statically provisioned persistent volume) or attempt to create one
+            on the fly (dynamically provisioned persistent volume)
+    what is a secret?
+        a piece of information in the cluster to be stored securely (database password)
+
+    what are services?
+        they set up networking in a kubernetes cluster
+            e.g clusterIP, nodePort, loadBalancer, ingress
+    what is a clusterIp?
+        exposes a set of pods to other objects in the cluster
+    what is a nodePort?
+        exposes a set of pods to the outside world (only really good for dev purposes!!!)
+    what is a loadBalancer?
+        legacy way of getting network traffic into a cluster
+            legacy because it will only really give access to one set of pods that has the "load balancer service".
+            wont be able to expose another set of pods within the cluster.
+    what is ingress?
+        exposes a set of services to the outside world
+    why use ingress instead of building out our own 'load balancing service' and 'nginx'?
+        one good reason is that the ingress will send traffic directly to the pod instead of through an clusterIp service.
+        this allows for features such as sticky sessions to be maintained, so that if a user wants to make more than one
+        request, that they go to the same application/pod.  

@@ -182,14 +182,10 @@ NOTES
         cat client-cluster-ip-service.yaml >> client.yaml
     > when implementing config files into kubectl
         you can just pass in the directory and the entire pool of config files will be passed in and implemented
-    > what is a volume? (k8s)
-        piece of storage tied to pod (if pod dies, volume dies)
-    > what is a persistant volume? (k8s)
-        a volume that lives outside of a pod (if a pod dies, volume persists)
-    > what is a persistant volume claim? (k8s)
-        an advertisedment of options which you can request inside of your pod config.
-        and when you do, kubernetes will look inside the stores of persistant volume and could give you
-            a volume ahead of time (statically provisioned persistent volume) or attempt to create one
-            on the fly (dynamically provisioned persistent volume)
-    > what is a secret?
-        a piece of information in the cluster to be stored securely (database password)
+    > there are several different implementations of a ingress
+    > to avoid looking into the incorrect documentation, ingress-nginsx is not the same as kubernetes-ingress
+        ingress-nginx      = github.com/kubernetes/ingress-nginx
+        kubernetes-ingress = github.com/nginxinc/kubernetes-ingress
+    > setup of ingress-nginx will be very different between local, google cloud, aws & azure
+    > good read on understanding ingress-nginx a bit better
+        https://www.joyfulbikeshedding.com/blog/2018-03-26-studying-the-kubernetes-ingress-system.html
