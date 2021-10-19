@@ -189,3 +189,5 @@ NOTES
     > setup of ingress-nginx will be very different between local, google cloud, aws & azure
     > good read on understanding ingress-nginx a bit better
         https://www.joyfulbikeshedding.com/blog/2018-03-26-studying-the-kubernetes-ingress-system.html
+    > tagging built docker images with the git commit hashes can be good to track the changes associated to
+        the build. this way we can update deployments without relying on 'latest' tag
