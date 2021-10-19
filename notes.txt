@@ -191,3 +191,5 @@ NOTES
         https://www.joyfulbikeshedding.com/blog/2018-03-26-studying-the-kubernetes-ingress-system.html
     > tagging built docker images with the git commit hashes can be good to track the changes associated to
         the build. this way we can update deployments without relying on 'latest' tag
+    > skaffold is a great tool for local kubernetes development, where files can sync to running pods or pods can 
+        automatically rebuild to reflect local changes
